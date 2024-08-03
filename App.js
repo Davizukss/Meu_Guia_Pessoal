@@ -1,10 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, StatusBar } from 'react-native';
+import Introduction_Screen from './src/screens/Introduction_Screen/Introduction_Screen';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar backgroundColor="#4A4DA1"/>
+      <Introduction_Screen />
     </View>
   );
 }
@@ -12,8 +14,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
 });
