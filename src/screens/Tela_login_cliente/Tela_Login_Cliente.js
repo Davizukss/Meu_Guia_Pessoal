@@ -1,12 +1,16 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import logo from '../../assets/Stack_Images/icon.png';
+import AntDesign from '@expo/vector-icons/AntDesign'
 
 
 export default function Tela_Login_Cliente(){
     return(
         <View style={styles.container}>
-            <Image source={logo} style={styles.logo} />
+            <View style={styles.sla}>
+                <TouchableOpacity style={styles.sla2}><AntDesign name='arrowleft' size={25}/></TouchableOpacity>
+                <Image source={logo} style={styles.logo} />
+            </View>
             <Text style={styles.textoLogo}>SEJA BEM VINDO (A)!</Text>
 
             <View style={styles.ContainerEscolha}>
@@ -53,10 +57,19 @@ const styles = StyleSheet.create({
         alignItems:'center',
         height:'100%'
     },
+    sla:{
+        flexDirection:'row'
+    },
+    sla2:{
+        position: 'absolute',
+        right: '62%',
+        top: '19%'
+    },
     logo: {
         width: 200,
         height: 200,
-        marginTop: 40 
+        marginTop: 40,
+        alignSelf:'center'
     },
     textoLogo:{
         fontWeight:'900',
@@ -88,7 +101,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'red'
     },
     textoCliente:{
         fontSize:20,
@@ -134,7 +146,7 @@ const styles = StyleSheet.create({
     JaPossui:{
         color: '#969696',
         fontSize: 16,
-        fontWeight: '600'
+        fontWeight: '600',
     },
     TxtPossui:{
         color: '#16195D',
