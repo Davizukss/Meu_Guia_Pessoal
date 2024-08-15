@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import voltar from '../../assets/Stack_Images/Tela_Login_Organizador/voltar.png';
 import logo from '../../assets/Stack_Images/Tela_Login_Organizador/logo.png';
 
 export default function MeuComponente() {
+    const [email, setEmail] = useState('');
+    const [cnpj, setCnpj] = useState('');
+    const [senha, setSenha] = useState('');
+    const [confirmSenha, setConfirmsenha] = useState('');
+
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <TouchableOpacity onPress={() => {}}>
@@ -22,19 +27,19 @@ export default function MeuComponente() {
             <View style={styles.containerInputs}>
                 <View>
                     <Text style={styles.label}>E-mail:</Text>
-                    <TextInput style={styles.input} placeholder='Email.exemplo@Gmail.com' keyboardType='email-address' autoCapitalize='none' autoCorrect={false}></TextInput>
+                    <TextInput style={styles.input} placeholder='Email.exemplo@Gmail.com' keyboardType='email-address' autoCapitalize='none' autoCorrect={false} onChangeText={setEmail}></TextInput>
                 </View>
                 <View>
                     <Text style={styles.label}>CNPJ:</Text>
-                    <TextInput style={styles.input} placeholder='00.000.000/0000-00' keyboardType='numeric' maxLength={18}></TextInput>
+                    <TextInput style={styles.input} placeholder='00.000.000/0000-00' keyboardType='numeric' maxLength={18} onChangeText={setCnpj}></TextInput>
                 </View>
                 <View>
                     <Text style={styles.label}>Senha:</Text>
-                    <TextInput style={styles.input} placeholder='*****************' secureTextEntry={true} autoCapitalize='none' autoCorrect={false} keyboardType="default" textContentType='password'></TextInput>
+                    <TextInput style={styles.input} placeholder='*****************' secureTextEntry={true} autoCapitalize='none' autoCorrect={false} keyboardType="default" textContentType='password' onChangeText={setSenha}></TextInput>
                 </View>
                 <View>
                     <Text style={styles.label}>Confirmar Senha:</Text>
-                    <TextInput style={styles.input} placeholder='*****************' secureTextEntry={true} autoCapitalize='none' autoCorrect={false} keyboardType="default" textContentType='password'></TextInput>
+                    <TextInput style={styles.input} placeholder='*****************' secureTextEntry={true} autoCapitalize='none' autoCorrect={false} keyboardType="default" textContentType='password' onChangeText={setConfirmsenha}></TextInput>
                 </View>
                 <View>
                     <TouchableOpacity style={styles.botao}>
@@ -138,5 +143,5 @@ const styles = StyleSheet.create({
     link:{
         textAlign:'center',
         marginTop: 5
-    }
+    },
 });
