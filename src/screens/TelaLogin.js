@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity,} from 'react-native';
 import logo from '../assets/Stack_Images/Tela_Login/logo.png';
 import google from '../assets/Stack_Images/Tela_Login/google.png';
 
 export default function TelaLogin(){
+
+    const [email, setEmail] = useState(null)
+    const [senha, setSenha] = useState(null)
+    const [errorEmail, setErrorEmail] = useState(null)
+    const [errotSenha, setErrorSenha] = useState(null)
+
+    const validar = () =>{
+        
+    }
+
+    const login = () =>{
+        if (validar()){
+            console.log("Validou")
+        }
+    }
+
     return(
         <View style={styles.container}> 
             <Image source = {logo} style={styles.logo}/>
@@ -12,6 +28,7 @@ export default function TelaLogin(){
             
             <Text style={styles.txt_email}>E-MAIL:</Text>
             <TextInput style={styles.email}
+                errorMessage = {errorEmail}
                 placeholder = {'Email.exemplo@gmail.com'}
             />
 
