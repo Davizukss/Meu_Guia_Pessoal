@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, StatusBar } from 'react-native';
-import Introduction_Screen from './src/screens/Introduction_Screen/Introduction_Screen';
+import Organizador_Screen from './src/screens/login_Screen/organizador_Screen.js';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#4A4DA1"/>
-      <Introduction_Screen />
+      <Organizador_Screen/>
     </View>
   );
 }
