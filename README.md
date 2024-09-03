@@ -27,6 +27,12 @@ O turismo no Brasil tem mostrado um crescimento significativo, com aumento no n�
 1. Clone o repositório:
    ```bash
    git clone https://github.com/Davizukss/meu-guia-pessoal.git
-   cd mgp_Front
+2. Navegue até o diretório do projeto:
+   ```bash
+    cd mgp_Front
+3. Instale as dependências:
+   ```bash
    npm install
+4. Inicie o projeto
+   ```bash
    npx expo start
