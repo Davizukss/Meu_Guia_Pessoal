@@ -1,5 +1,6 @@
 # Meu Guia Pessoal
-![Screenshot do Aplicativo](https://github.com/Davizukss/Mgp_Front/src/assets/Stack_Images/icon.png)
+![Ícone do Aplicativo](https://github.com/Davizukss/meu-guia-pessoal/raw/main/Mgp_Front/src/assets/Stack_Images/icon.png)
+
 ## Descrição
 
 **Meu Guia Pessoal** é um aplicativo móvel projetado para facilitar viagens independentes, permitindo que os usuários planejem suas próprias rotas, descubram pontos turísticos e encontrem opções de alimentação e hospedagem de maneira simples e eficaz. Utilizando tecnologias de geolocalização e planejamento de rotas, o aplicativo visa melhorar a experiência do usuário durante suas viagens, eliminando a necessidade de guias turísticos contratados.
