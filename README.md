@@ -1,5 +1,5 @@
 # Meu Guia Pessoal
-![Ícone do Aplicativo](https://github.com/Davizukss/meu-guia-pessoal/raw/main/Mgp_Front/src/assets/Stack_Images/icon.png)
+![Ícone do Aplicativo](https://github.com/Davizukss/Meu-Guia-Pessoal/raw/main/Mgp_Front/src/assets/Stack_Images/icon.png)
 
 ## Descrição
 
