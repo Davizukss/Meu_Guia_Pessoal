@@ -2,12 +2,14 @@ import React from 'react';
 import { View, StyleSheet, StatusBar } from 'react-native';
 import Organizador_Screen from './src/screens/Organizador_Screen/Organizador_Screen.js'
 import Introduction_Screen from './src/screens/Introduction_Screen/Introduction_Screen.js'
+import Cadastro_Cliente_Screen from './src/screens/Cadastro_Cliente_Screen/Cadastro_Cliente_Screen.js'
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#4A4DA1"/>
-      <Organizador_Screen/> 
-      {/* <Introduction_Screen/>*/}
+    {/*   <Cadastro_Cliente_Screen/> */}
+      <Organizador_Screen/>
+      {/* <Introduction_Screen/> */}
     </View>
   );
 }

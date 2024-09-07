@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image } from 'react-native';
-import voltar from '../../assets/Stack_Images/Tela_Cadastro_Clientes/voltar.png';
-import logo from '../../assets/Stack_Images/Tela_Cadastro_Clientes/logo.png';
-import google from '../../assets/Stack_Images/Tela_Cadastro_Clientes/google.png';
+import voltar from '../../assets/Stack_Images/Cadastro_Cliente_Screen/voltar.png';
+import logo from '../../assets/Stack_Images/Cadastro_Cliente_Screen/logo.png';
+import google from '../../assets/Stack_Images/Cadastro_Cliente_Screen/google.png';
 
-export default function Tela_Cadastro_Cliente() {
+export default function Cadastro_Cliente_Screen() {
     const [email, setEmail] = useState('');
     const [cpf, setCpf] = useState('');
     const [senha, setSenha] = useState('');

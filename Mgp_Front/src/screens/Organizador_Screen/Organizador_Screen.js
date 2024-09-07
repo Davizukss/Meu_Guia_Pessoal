@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image } from 'react-native';
-import voltar from '../../assets/Stack_Images/Tela_Login_Organizador/voltar.png';
-import logo from '../../assets/Stack_Images/Tela_Login_Organizador/logo.png';
+import voltar from '../../assets/Stack_Images/Organizador_Screen/voltar.png';
+import logo from '../../assets/Stack_Images/Organizador_Screen/logo.png';
 import google from '../../assets/Stack_Images/google.png';
 
 export default function MeuComponente() {
@@ -219,7 +219,9 @@ const styles = StyleSheet.create({
         borderColor: '#16195D',
     },
     Organizador: {
-        height: 45,
+        bottom: 1,
+        left: 1,
+        height: 48,
         backgroundColor: '#16195D',
         width: '55%',
         borderRadius: 25,
@@ -229,12 +231,14 @@ const styles = StyleSheet.create({
     txtcliente: {
         fontSize: 16,
         color: '#16195D',
-        fontWeight: '700',
+        fontWeight: '900',
+        textTransform: 'uppercase'
     },
     txtorganizador: {
         fontSize: 16,
         color: '#fff',
-        fontWeight: '700',
+        fontWeight: '900',
+        textTransform: 'uppercase'
     },
     containerInputs: {
         width: '90%',
