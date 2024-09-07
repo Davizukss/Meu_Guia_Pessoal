@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, StatusBar, View } from 'react-native';
-import AppNavigator from './src/Routes/AppNavigator'; 
-
+import AppNavigator from './src/Routes/AppNavigator.js'; 
 export default function App() {
   return (
     <View style={styles.container}>

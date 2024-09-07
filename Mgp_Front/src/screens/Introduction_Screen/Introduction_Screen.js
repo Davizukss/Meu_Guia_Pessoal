@@ -38,7 +38,7 @@ export default function Introduction_Screen() {
                         Comece agora e obtenha o melhor do lazer.
                     </Text>
                 </View>
-                <TouchableOpacity style={styles.bck_button} onPress={() => navigation.navigate('TelaLogin')}>
+                <TouchableOpacity style={styles.bck_button} onPress={() => navigation.navigate('Home_Screen')}>
                     <Text style={styles.button}>INICIE AQUI</Text>
                 </TouchableOpacity>
             </ImageBackground>
