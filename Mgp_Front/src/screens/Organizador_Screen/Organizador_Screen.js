@@ -8,6 +8,7 @@ export default function MeuComponente() {
     const [email, setEmail] = useState('');
     const [cnpj, setCnpj] = useState('');
     const [senha, setSenha] = useState('');
+    const [nome, setNome] = useState('');
     const [confirmSenha, setConfirmSenha] = useState('');
     const [errors, setErrors] = useState({});
 
@@ -28,6 +29,9 @@ export default function MeuComponente() {
             newErrors.email = 'Email inválido';
         }
 
+        if (nome.length < 8) {
+            newErrors.nome = 'O Nome deve conter pelo menos 8 caracteres';
+        }
         if (senha.length < 8) {
             newErrors.senha = 'A senha deve conter pelo menos 8 caracteres';
         }
@@ -41,7 +45,7 @@ export default function MeuComponente() {
         }
 
         if (Object.keys(newErrors).length === 0) {
-            console.log('Formulário enviado com sucesso:', { email, senha, cnpj });
+            console.log('Formulário enviado com sucesso:', { email, senha, cnpj, nome });
         } else {
             setErrors(newErrors);
         }
@@ -73,6 +77,19 @@ export default function MeuComponente() {
             </View>
 
             <View style={styles.containerInputs}>
+            <View style={styles.inputsView}>
+                    <Text style={styles.label}>Nome do Estabelecimento:</Text>
+                    <TextInput 
+                        style={styles.input} 
+                        placeholder='Nome do Estabelecimento' 
+                        keyboardType='default' 
+                        autoCapitalize='sentences' 
+                        autoCorrect={true} 
+                        onChangeText={setNome} 
+                        value={nome}
+                    />
+                    {errors.nome && <Text style={styles.error}>{errors.nome}</Text>}
+                </View>
                 <View style={styles.inputsView}>
                     <Text style={styles.label}>E-mail:</Text>
                     <TextInput 

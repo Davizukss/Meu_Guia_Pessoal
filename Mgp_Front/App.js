@@ -6,8 +6,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#4A4DA1"/>
-      {/* <Organizador_Screen/> */}
-      <Introduction_Screen/>
+      <Organizador_Screen/> 
+      {/* <Introduction_Screen/>*/}
     </View>
   );
 }
