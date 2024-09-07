@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, StatusBar } from 'react-native';
 import Introduction_Screen from './src/screens/Introduction_Screen/Introduction_Screen';
-import Login_CLiente from "./src/screens/Tela_login_cliente/Tela_Login_Cliente"
+import Tela_Cadastro_Cliente from "./src/screens/Tela_Cadastro_Cliente/Tela_Cadastro_Cliente.js"
 
 export default function App() {
   return (
@@ -9,7 +9,7 @@ export default function App() {
     //   <StatusBar backgroundColor="#4A4DA1"/>
     //   <Introduction_Screen />
     // </View>
-    <Login_CLiente/>
+    <Tela_Cadastro_Cliente/>
   );
 }
 
