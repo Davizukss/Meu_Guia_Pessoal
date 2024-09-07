@@ -16,7 +16,7 @@ export default function Introduction_Screen() {
                     <Text style={styles.title}>MEU GUIA PESSOAL</Text>
                     <Image source={logo} style={styles.logo} />
                     <Text style={styles.description}>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Aproveite ao Máximo sua viagem com o nosso Guia! Permita a si mesmo ter um lazer sem a necessidade de um tempo limite.
                     </Text>
                 </View>
             </ImageBackground>
@@ -25,7 +25,7 @@ export default function Introduction_Screen() {
                     <Text style={styles.title}>ESCOLHA SUA ROTA</Text>
                     <Image source={logo} style={styles.logo} />
                     <Text style={styles.description}>
-                    texto introdutorio lallallalallalalala sla oq escrever aqui gavioes da fiel mt bom slk novinho
+                    Com a customização de Rotas, você não perde nenhum dos destinos, atrações ou até paradas rápidas em sua Viagem!
                     </Text>
                 </View>
             </ImageBackground>
@@ -34,7 +34,7 @@ export default function Introduction_Screen() {
                     <Text style={styles.title}>INICIE SUA JORNADA</Text>
                     <Image source={logo} style={styles.logo} />
                     <Text style={styles.description}>
-                        texto falando q o usuario pode  logar dps p salvar as informações e pipipopo
+                        Comece agora e obtenha o melhor do Lazer.
                     </Text>
                 </View>
                 <TouchableOpacity style={styles.bck_button}>
