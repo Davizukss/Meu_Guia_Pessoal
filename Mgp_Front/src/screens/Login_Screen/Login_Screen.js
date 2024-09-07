@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView , ImageBackground} from 'react-native';
+import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; 
+
 import logo from '../../assets/Stack_Images/Login_Screen/logo.png';
 import google from '../../assets/Stack_Images/Login_Screen/google.png';
 import voltar from '../../assets/Stack_Images/Login_Screen/voltar.png';
@@ -8,6 +10,8 @@ export default function Login_Screen() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [errors, setErrors] = useState({});
+
+    const navigation = useNavigation();
 
     const validateEmail = (email) => {
         const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -25,7 +29,8 @@ export default function Login_Screen() {
         }
 
         setErrors(newErrors);
-    //Endy fazer validacao da senha  e email com base no banco
+
+        // Endy fazer validacao da senha e email com base no banco
         if (Object.keys(newErrors).length === 0) {
             try {
                 const response = await fetch('https://seu-servidor.com/api/login', {
@@ -51,8 +56,8 @@ export default function Login_Screen() {
 
     return (
         <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
-              <View style={styles.setaContainer}>
-                <TouchableOpacity style={styles.seta} onPress={() => {}}>
+            <View style={styles.setaContainer}>
+                <TouchableOpacity style={styles.seta} onPress={() => navigation.goBack()}>
                     <ImageBackground source={voltar} style={styles.voltar} />
                 </TouchableOpacity>
             </View>
@@ -96,7 +101,7 @@ export default function Login_Screen() {
             
             <View style={styles.rowContainer}>
                 <Text style={styles.nao_possui_conta}>não possui uma conta?</Text> 
-                <TouchableOpacity style={styles.btn_criar_conta}>
+                <TouchableOpacity style={styles.btn_criar_conta} onPress={() => navigation.navigate('TelaCadastroClie')}>
                     <Text style={styles.txt_criar_conta}>Crie uma</Text>
                 </TouchableOpacity>
             </View>
@@ -225,7 +230,7 @@ const styles = StyleSheet.create({
         color: '#16195D',
         fontSize: 16,
         fontWeight: 'bold',
-        textDecorationLine : 'underline',
+        textDecorationLine: 'underline',
     },
     errorTextEmail: {
         color: 'red',
