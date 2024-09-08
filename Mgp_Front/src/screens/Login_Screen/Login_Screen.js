@@ -25,10 +25,11 @@ export default function Login_Screen() {
         }
 
         setErrors(newErrors);
+
     //Endy fazer validacao da senha  e email com base no banco
         if (Object.keys(newErrors).length === 0) {
             try {
-                const response = await fetch('https://seu-servidor.com/api/login', {
+                const response = await fetch('http:localhost:3001/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

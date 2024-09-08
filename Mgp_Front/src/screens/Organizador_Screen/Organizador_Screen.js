@@ -22,7 +22,7 @@ export default function MeuComponente() {
         return cnpjRegex.test(cnpj);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const newErrors = {};
 
         if (!validateEmail(email)) {
@@ -45,7 +45,29 @@ export default function MeuComponente() {
         }
 
         if (Object.keys(newErrors).length === 0) {
+
             console.log('Formulário enviado com sucesso:', { email, senha, cnpj, nome });
+
+            try {
+                const response = await fetch('http:localhost:3001/add-org', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ cnpj, email, senha }),
+                });
+            if (response.ok) {
+              Alert.alert('Sucesso!', 'Cadastro realizado com sucesso');
+              setNome(''); 
+              setCnpj(''); 
+              setEmail('');
+              setSenha('');
+            } else {}
+          } catch (error) {
+            console.error('Detalhes:', error);
+            Alert.alert('Erro', 'Ocorreu um erro');
+          }
+
         } else {
             setErrors(newErrors);
         }
