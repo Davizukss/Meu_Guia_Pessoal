@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image } from 'react-native';
+import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image, Alert } from 'react-native';
 import voltar from '../../assets/Stack_Images/Cadastro_Cliente_Screen/voltar.png';
 import logo from '../../assets/Stack_Images/Cadastro_Cliente_Screen/logo.png';
 import google from '../../assets/Stack_Images/Cadastro_Cliente_Screen/google.png';
@@ -78,7 +78,7 @@ export default function Cadastro_Cliente_Screen() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ cnpj, email, senha }),
+                    body: JSON.stringify({ nome, cpf, email, senha }),
                 });
             if (response.ok) {
               Alert.alert('Sucesso!', 'Cadastro realizado com sucesso');

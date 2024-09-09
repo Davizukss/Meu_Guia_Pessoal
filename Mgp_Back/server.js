@@ -108,8 +108,10 @@ app.get('/login', async (req, res) => {
 
     if (result.recordset.length === 0) {
       query = 'SELECT * FROM Turista WHERE email = @email AND senha = @senha';
+
       request.input('email', sql.VarChar, email);
       request.input('senha', sql.VarChar, senha);
+
       result = await request.query(query);
       if (result.recordset.length === 0) {
        sucesso = false;
