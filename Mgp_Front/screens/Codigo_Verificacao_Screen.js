@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, ScrollView, StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import { ImageBackground, ScrollView, StyleSheet, TouchableOpacity, View, Text, TextInput, code} from 'react-native';
 import voltar from '../assets/voltar.png';
 import arara from '../assets/arara.png';
 
@@ -24,6 +24,48 @@ export default function Verificacao() {
                     Insira no campo abaixo o codigo de verificação fornecido pelo E-mail
                 </Text>
             </View>
+            <View style={styles.codigoContainer}>
+                <TextInput 
+                    style={styles.codigo}
+                    maxLenght={1}
+                    value={code}
+                    keyboardType="numeric"
+                    placeholder="0"
+                />
+                <TextInput 
+                    style={styles.codigo}
+                    maxLenght={1}
+                    value={code}
+                    keyboardType="numeric"
+                    placeholder="0"
+                />
+                <TextInput 
+                    style={styles.codigo}
+                    maxLenght={1}
+                    value={code}
+                    keyboardType="numeric"
+                    placeholder="0"
+                />
+                <TextInput 
+                    style={styles.codigo}
+                    maxLenght={1}
+                    value={code}
+                    keyboardType="numeric"
+                    placeholder="0"
+                />
+                <TextInput 
+                    style={styles.codigo}
+                    maxLenght={1}
+                    value={code}
+                    keyboardType="numeric"
+                    placeholder="0"
+                />
+            </View>
+            <View style={styles.enviarContainer}>
+                <TouchableOpacity style={styles.btnenviar} onPress={() => {  }}>
+                    <Text style={styles.txtenviar}>ENVIAR</Text>
+                </TouchableOpacity>
+            </View> 
         </ScrollView>
     );
 }
@@ -67,6 +109,44 @@ const styles = StyleSheet.create({
         color: '#000000',
         fontSize: 18,
         textAlign: 'center',
-        marginTop: 20
+        marginTop: 15
+    },
+    codigoContainer:{
+        flexDirection: 'row',
+        marginBottom: 50,
+        alignItems: 'center', 
+        display: 'flex',
+        justifyContent: 'space-around' 
+    },
+    codigo:{
+        justifyContent: 'center',
+        textAlign: 'center',
+        top: 25,
+        fontSize: 40,
+        border: 1,
+        height: 80,
+        width: 52,
+        borderWidth: 3,
+        borderRadius: 20,
+        borderColor: '#969696',    
+        margin: 10
+    },
+    btnenviar:{
+        justifyContent: 'center',
+        width: 350,
+        gap: 8,
+        paddingTop: 10,
+        paddingRight: 24,
+        paddingBottom: 10,
+        paddingLeft: 24, 
+        height: 60,
+        backgroundColor: '#16195D',
+        border: 1,
+        borderRadius: 100
+    },
+    txtenviar:{
+        textAlign: 'center',
+        color: '#FFFF',
+        fontSize: 20,
     }
 });
