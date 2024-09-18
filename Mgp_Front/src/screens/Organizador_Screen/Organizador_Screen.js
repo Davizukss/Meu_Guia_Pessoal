@@ -47,7 +47,7 @@ export default function MeuComponente() {
         if (Object.keys(newErrors).length === 0) {
 
             try {
-                const response = await fetch('http://localhost:3001/add-org', { 
+                const response = await fetch('http://localhost:3001/api/add-org', { 
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

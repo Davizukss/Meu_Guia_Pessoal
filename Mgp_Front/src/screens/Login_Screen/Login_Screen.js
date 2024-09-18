@@ -29,15 +29,16 @@ export default function Login_Screen() {
         
         if (Object.keys(newErrors).length === 0) {
             try {
-                const response = await fetch(`http://localhost:3001/login?email=${encodeURIComponent(email)}&senha=${encodeURIComponent(senha)}`, {
-                    method: 'GET', // Use GET
+                const response = await fetch('http://localhost:3001/api/login', {
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    body: JSON.stringify({ email, senha }),
                 });
-        
+
                 const data = await response.json();
-        
+
                 if (data.success) {
                     console.log('Login bem-sucedido');
                 } else {
@@ -47,7 +48,6 @@ export default function Login_Screen() {
                 console.error('Erro ao tentar logar', error);
             }
         }
-        
     };
 
     return (

@@ -70,9 +70,10 @@ export default function Cadastro_Cliente_Screen() {
         }
 
         if (Object.keys(newErrors).length === 0) {
+            console.log('Formulário enviado com sucesso:', { email, senha, cpf, nome });
 
             try {
-                const response = await fetch('http://localhost:3001/add-cli', { 
+                const response = await fetch('http://localhost:3001/api/add-cli', { 
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -81,8 +82,6 @@ export default function Cadastro_Cliente_Screen() {
                 });
             if (response.ok) {
               Alert.alert('Sucesso!', 'Cadastro realizado com sucesso');
-              console.log('Formulário enviado com sucesso:', { email, senha, cpf, nome });
-              
               setNome(''); 
               setCpf(''); 
               setEmail('');
