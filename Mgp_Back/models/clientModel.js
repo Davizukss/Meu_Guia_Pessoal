@@ -2,15 +2,14 @@
 const sql = require('mssql');
 const config = require('../config/dbconfig');
 
-const addClient = async (nome, cpf, email, senha) => {
+const addClient = async (nome, email, senha) => {
   try {
     await sql.connect(config);
-    const query = `INSERT INTO Turista (usu_nome, usu_senha, usu_email, usu_tour_cpf) VALUES (@nome, @senha, @email, @cpf)`;
+    const query = `INSERT INTO Turista (usu_nome, usu_senha, usu_email, usu_tour_cpf) VALUES (@nome, @senha, @email)`;
     const request = new sql.Request();
     request.input('nome', sql.VarChar, nome);
     request.input('senha', sql.VarChar, senha);
     request.input('email', sql.VarChar, email);
-    request.input('cpf', sql.Char, cpf);
     await request.query(query);
   } catch (err) {
     throw new Error(`Error adding client: ${err.message}`);

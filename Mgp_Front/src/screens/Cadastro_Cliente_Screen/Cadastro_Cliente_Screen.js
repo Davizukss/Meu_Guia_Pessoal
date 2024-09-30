@@ -78,7 +78,7 @@ export default function Cadastro_Cliente_Screen() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ nome, cpf, email, senha }),
+                    body: JSON.stringify({ nome, email, senha }),
                 });
             if (response.ok) {
               Alert.alert('Sucesso!', 'Cadastro realizado com sucesso');
