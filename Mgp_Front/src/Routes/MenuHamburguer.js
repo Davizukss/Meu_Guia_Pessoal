@@ -1,9 +1,11 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import HomeScreen from '../screens/Home_Screen/Home_Screen';
-import { useNavigation } from '@react-navigation/native'; 
+import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import seta from "../assets/Stack_Images/voltar.png";
+import Perfil from '../Components/Perfil/Perfil'; 
 
 const Drawer = createDrawerNavigator();
 
@@ -11,12 +13,10 @@ function DrawerContent() {
   const navigation = useNavigation();
   return (
     <View style={styles.drawerContent}>
-      <TouchableOpacity onPress={() => navigation.navigate('TelaLogin')}>
-        <Text>Logar</Text>
+      <TouchableOpacity style={styles.seta} onPress={() => navigation.navigate('TelaInicial')}>
+        <Image source={seta} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('TelaCadastroClie')}>
-        <Text>Cadastrar</Text>
-      </TouchableOpacity>
+      <Perfil /> 
     </View>
   );
 }
@@ -25,7 +25,7 @@ const CustomHeaderButton = () => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigation.toggleDrawer()} 
+      onPress={() => navigation.toggleDrawer()}
       style={styles.headerButton}
     >
       <View style={styles.iconContainer}>
@@ -40,18 +40,22 @@ const DrawerNavigator = () => {
     <Drawer.Navigator
       drawerContent={() => <DrawerContent />}
       screenOptions={{
-        headerLeft: () => <CustomHeaderButton />, 
-        headerTransparent: true, 
-        headerTitle: '', 
-        headerShadowVisible: false, 
+        headerLeft: () => <CustomHeaderButton />,
+        headerTransparent: true,
+        headerTitle: '',
+        headerShadowVisible: false,
         headerLeftContainerStyle: {
           marginLeft: 20,
         },
         drawerStyle: {
-          width: 250,
+          width: 300,
+          borderTopRightRadius: 20,
+          borderBottomRightRadius: 20,
+          overflow: 'hidden',
+          elevation: 5,
         },
-        headerPressable: false, 
-        headerTintColor: 'transparent', 
+        headerPressable: false,
+        headerTintColor: 'transparent',
       }}
     >
       <Drawer.Screen name="Home" component={HomeScreen} />
@@ -64,6 +68,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: 16,
+  },
+  seta: {
+    marginVertical: 20,
+    alignSelf: 'flex-start',
   },
   headerButton: {
     marginLeft: 25,
