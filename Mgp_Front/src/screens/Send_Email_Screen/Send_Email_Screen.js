@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image } from 'react-native';
+import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import emailjs from '@emailjs/browser'
 import voltar from '../../assets/Stack_Images/Cadastro_Cliente_Screen/voltar.png';
 import logo from '../../assets/Stack_Images/Cadastro_Cliente_Screen/logo.png';
-import google from '../../assets/Stack_Images/Cadastro_Cliente_Screen/google.png';
 
 export default function Send_Email_Screen() {
     const [email, setEmail] = useState('');
@@ -14,16 +14,36 @@ export default function Send_Email_Screen() {
     };
     const handleSubmit = () => {
         const newErrors = {};
-
         if (!validateEmail(email)) {
             newErrors.email = 'Email inválido';
         }
 
         if (Object.keys(newErrors).length === 0) {
-            console.log('Formulário enviado com sucesso:', { email, senha, cpf, nome });
+            console.log('Formulário enviado com sucesso:', { email });
         } else {
             setErrors(newErrors);
         }
+
+        const serviceId = 'service_hwbz3hh';
+        const templateId = 'template_ru9s7zg';
+        const publicKey = '';
+
+        // Create a new object that contains dynamic template params
+        const templateParams = {
+        codigo: 123456,
+        to_email: email,
+        to_name: 'teste',
+        };
+
+        // Send the email using EmailJS
+        emailjs.send(serviceId, templateId, templateParams, publicKey)
+        .then((response) => {
+            console.log('Email sent successfully!', response);
+            setEmail('');
+        })
+        .catch((error) => {
+            console.error('Error sending email:', error);
+        });
     };
 
     return  (
