@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import Foto from "../../assets/Stack_Images/MenuHamburguer/fotoperfil.png"; 
 import historico from "../../assets/Stack_Images/MenuHamburguer/historico.png"; 
 import configuracao from "../../assets/Stack_Images/MenuHamburguer/configuracao.png"; 
-
+import duvida from "../../assets/Stack_Images/MenuHamburguer/ajuda.png"; 
 export default function Perfil() {
     const navigation = useNavigation();
 
@@ -27,6 +27,11 @@ export default function Perfil() {
             <TouchableOpacity style={styles.config} onPress={() => navigation.navigate('TelaConfiguracoes')}>
                 <Image source={configuracao} />
                 <Text style={styles.configText}>Configurações</Text>
+            </TouchableOpacity>
+            </View>
+            <View style={styles.duvidaContainer}>
+            <TouchableOpacity style={styles.duvida} onPress={() => navigation.navigate('TelaAjuda')}>
+                <Image source={duvida} />
             </TouchableOpacity>
             </View>
         </View>
@@ -68,7 +73,17 @@ const styles = StyleSheet.create({
         marginRight: 40,
         alignItems: 'flex-start', 
       },
+      duvidaContainer: {
+        marginTop: 40, 
+        marginLeft: 220,
+        alignItems: 'flex-end', 
+      },
       config: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 15, 
+      },
+      duvida: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingVertical: 15, 
