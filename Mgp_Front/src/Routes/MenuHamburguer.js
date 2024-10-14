@@ -1,7 +1,7 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import HomeScreen from '../screens/Home_Screen/Home_Screen';
+import MapScreen from '../screens/Map_Screen/Map_Screen';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import seta from "../assets/Stack_Images/voltar.png";
@@ -58,7 +58,7 @@ const DrawerNavigator = () => {
         headerTintColor: 'transparent',
       }}
     >
-      <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen name="map" component={MapScreen} />
     </Drawer.Navigator>
   );
 };

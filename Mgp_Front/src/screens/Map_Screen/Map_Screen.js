@@ -1,13 +1,14 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import MapView from 'react-native-maps';
 import Pesquisa from '../../Components/Pesquisa/Pesquisa.js';
 
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
-
 const MapScreen = () => {
   return (
-    <View style={styles.container}>
+    <View
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <MapView
         style={styles.map}
         initialRegion={{

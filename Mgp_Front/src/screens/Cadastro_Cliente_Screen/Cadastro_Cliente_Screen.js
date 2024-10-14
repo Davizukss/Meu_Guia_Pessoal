@@ -20,35 +20,7 @@ export default function Cadastro_Cliente_Screen() {
         return emailRegex.test(email);
     };
 
-    const validateCpf = (cpf) => {
-        cpf = cpf.replace(/\D/g, '');
-
-        if (cpf.length !== 11) return false;
-
-        if (/^(\d)\1+$/.test(cpf)) return false;
-
-        let sum = 0;
-        let remainder;
-
-        for (let i = 1; i <= 9; i++) {
-            sum += parseInt(cpf.substring(i-1, i)) * (11 - i);
-        }
-        remainder = (sum * 10) % 11;
-
-        if ((remainder === 10) || (remainder === 11)) remainder = 0;
-        if (remainder !== parseInt(cpf.substring(9, 10))) return false;
-
-        sum = 0;
-        for (let i = 1; i <= 10; i++) {
-            sum += parseInt(cpf.substring(i-1, i)) * (12 - i);
-        }
-        remainder = (sum * 10) % 11;
-
-        if ((remainder === 10) || (remainder === 11)) remainder = 0;
-        if (remainder !== parseInt(cpf.substring(10, 11))) return false;
-
-        return true;
-    };
+    
 
     const handleSubmit = () => {
         const newErrors = {};
@@ -68,12 +40,8 @@ export default function Cadastro_Cliente_Screen() {
             newErrors.confirmSenha = 'As senhas não são iguais';
         }
 
-        if (!validateCpf(cpf)) {
-            newErrors.cpf = 'CPF inválido';
-        }
-
         if (Object.keys(newErrors).length === 0) {
-            console.log('Formulário enviado com sucesso:', { email, senha, cpf, nome });
+            console.log('Formulário enviado com sucesso:', { email, senha, nome });
         } else {
             setErrors(newErrors);
         }
@@ -130,18 +98,6 @@ export default function Cadastro_Cliente_Screen() {
                         value={email}
                     />
                     {errors.email && <Text style={styles.error}>{errors.email}</Text>}
-                </View>
-                <View style={styles.inputsView}>
-                    <Text style={styles.label}>CPF:</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        placeholder='000.000.000-00' 
-                        keyboardType='numeric' 
-                        maxLength={11} 
-                        onChangeText={setCpf} 
-                        value={cpf}
-                    />
-                    {errors.cpf && <Text style={styles.error}>{errors.cpf}</Text>}
                 </View>
                 <View style={styles.inputsView}>
                     <Text style={styles.label}>Senha:</Text>
