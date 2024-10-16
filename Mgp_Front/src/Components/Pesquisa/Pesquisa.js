@@ -13,7 +13,6 @@ const Pesquisa = () => {
   const [expanded, setExpanded] = useState(false);
   const translateY = useSharedValue(SCREEN_HEIGHT);
 
-  // Adiciona listeners para o teclado
   useEffect(() => {
     const keyboardShowListener = Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
     const keyboardHideListener = Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
@@ -37,9 +36,9 @@ const Pesquisa = () => {
     const threshold = 100;
 
     if (translationY < -threshold) {
-      toggleExpand(true); // Expande para cima
+      toggleExpand(true);
     } else if (translationY > threshold) {
-      toggleExpand(false); // Colapsa para baixo
+      toggleExpand(false);
     } else {
       translateY.value = withSpring(expanded ? 0 : SCREEN_HEIGHT);
     }
@@ -47,12 +46,12 @@ const Pesquisa = () => {
 
   const toggleExpand = (shouldExpand) => {
     setExpanded(shouldExpand);
-    translateY.value = withSpring(shouldExpand ? 0 : SCREEN_HEIGHT); // Controla a animação de expansão
+    translateY.value = withSpring(shouldExpand ? 0 : SCREEN_HEIGHT);
   };
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateY: translateY.value }],
-    height: expanded ? (SCREEN_HEIGHT * 0.94) : "435%",
+    height: expanded ? SCREEN_HEIGHT * 0.94 : '435%',
   }));
 
   return (
@@ -64,14 +63,14 @@ const Pesquisa = () => {
           </View>
           <View style={styles.searchBar}>
             <Image source={lupa} style={styles.icon} />
-            <TextInput 
-              style={styles.pesquisa} 
-              placeholder='Buscar rotas turísticas...' 
-              onFocus={() => { 
+            <TextInput
+              style={styles.pesquisa}
+              placeholder='Buscar rotas turísticas...'
+              onFocus={() => {
                 if (!expanded) {
-                  toggleExpand(true); // Expande automaticamente ao focar
+                  toggleExpand(true);
                 }
-              }} 
+              }}
             />
             <TouchableOpacity>
               <Image source={filtro} style={styles.icon} />
@@ -117,8 +116,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    width: "90%",
-    backgroundColor: "#F1F1F1",
+    width: '90%',
+    backgroundColor: '#F1F1F1',
     borderRadius: 40,
     marginHorizontal: '5%',
     paddingVertical: 10,

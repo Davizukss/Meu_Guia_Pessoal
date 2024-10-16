@@ -6,7 +6,7 @@ import OrganizadorScreen from '../screens/Organizador_Screen/Organizador_Screen'
 import CadastroClienteScreen from '../screens/Cadastro_Cliente_Screen/Cadastro_Cliente_Screen';
 import LoginScreen from '../screens/Login_Screen/Login_Screen';
 import TelaInicial from '../screens/Introduction_Screen/Introduction_Screen';
-
+import Local_Screen from '../Components/Local_Screen/Local_Screen.js'
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
@@ -18,6 +18,7 @@ export default function AppNavigator() {
         <Stack.Screen name="TelaCadastroOrg" component={OrganizadorScreen} options={{ headerShown: false }} />
         <Stack.Screen name="TelaCadastroClie" component={CadastroClienteScreen} options={{ headerShown: false }} />
         <Stack.Screen name="TelaLogin" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Local_Screen" component={Local_Screen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

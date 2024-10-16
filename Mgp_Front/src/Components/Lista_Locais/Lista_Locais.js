@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, FlatList, Image, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Importe o hook de navegação
 import Vinicula from '../../assets/Stack_Images/Lista_Locais/Vinicula.png';
 import Zulai from '../../assets/Stack_Images/Lista_Locais/Zulai.png';
 import Liberdade from '../../assets/Stack_Images/Lista_Locais/Liberdade.png';
@@ -13,8 +14,14 @@ const locais = [
 ];
 
 export default function Lista_Locais() {
+  const navigation = useNavigation(); 
+
   const handleImagePress = (id) => {
-    console.log(`Imagem com ID ${id} pressionada.`);
+    if (id === '1') {
+      navigation.navigate('Local_Screen');
+    } else {
+      console.log(`Imagem com ID ${id} pressionada.`);
+    }
   };
 
   const renderItem = ({ item }) => (
