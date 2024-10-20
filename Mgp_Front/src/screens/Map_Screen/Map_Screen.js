@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { LocalContext } from '../../Context/Local_Context/LocalContext.js'; 
+import { LocalContext } from '../../Context/LocalContext.js'; 
 import Pesquisa from '../../Components/Pesquisa/Pesquisa.js';
 
 const MapScreen = () => {

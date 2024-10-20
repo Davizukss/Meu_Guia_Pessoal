@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { LocalContext } from '../../Context/Local_Context/LocalContext'; 
+import { LocalContext } from '../../Context/LocalContext'; 
 import local from '../../assets/Stack_Images/Lista_Locais/card.jpg';
 
 const locais = [
