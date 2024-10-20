@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, FlatList, Image, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // Importe o hook de navegação
+import { useNavigation } from '@react-navigation/native'; 
 import Vinicula from '../../assets/Stack_Images/Lista_Locais/Vinicula.png';
 import Zulai from '../../assets/Stack_Images/Lista_Locais/Zulai.png';
 import Liberdade from '../../assets/Stack_Images/Lista_Locais/Liberdade.png';

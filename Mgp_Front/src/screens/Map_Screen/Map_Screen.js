@@ -1,14 +1,14 @@
-import React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
-import MapView from 'react-native-maps';
+import React, { useContext } from 'react';
+import { View, StyleSheet } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
+import { LocalContext } from '../../Context/Local_Context/LocalContext.js'; 
 import Pesquisa from '../../Components/Pesquisa/Pesquisa.js';
 
 const MapScreen = () => {
+  const { localData } = useContext(LocalContext);  
+
   return (
-    <View
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
+    <View style={styles.container}>
       <MapView
         style={styles.map}
         initialRegion={{
@@ -17,8 +17,16 @@ const MapScreen = () => {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-      />
-      <Pesquisa /> 
+      >
+        {localData.length > 0 && localData.map((local, index) => (
+          <Marker
+            key={index}
+            coordinate={{ latitude: local.latitude, longitude: local.longitude }}
+            title={local.name}
+          />
+        ))}
+      </MapView>
+      <Pesquisa />
     </View>
   );
 };

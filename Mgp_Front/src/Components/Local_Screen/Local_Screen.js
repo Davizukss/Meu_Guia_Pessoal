@@ -1,9 +1,26 @@
+import React, { useContext } from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
-import local from '../../assets/Stack_Images/Lista_Locais/card.jpg';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { LocalContext } from '../../Context/Local_Context/LocalContext'; 
+import local from '../../assets/Stack_Images/Lista_Locais/card.jpg';
+
+const locais = [
+  { name: 'Vinícola São Roque', latitude: -23.5, longitude: -47.0 },
+  { name: 'Avenida Paulista', latitude: -23.5617, longitude: -46.6552 },
+  { name: 'Parque Ibirapuera', latitude: -23.5875, longitude: -46.6564 },
+  { name: 'Museu do Ipiranga', latitude: -23.5908, longitude: -46.6340 },
+  { name: 'Mercadão de São Paulo', latitude: -23.5505, longitude: -46.6340 },
+];
 
 export default function Local_Screen({ navigation }) {
+  const { setLocalData } = useContext(LocalContext); 
+
+  const iniciarCircuito = () => {
+    setLocalData(locais); 
+    navigation.navigate('Map_Screen');  
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -19,22 +36,13 @@ export default function Local_Screen({ navigation }) {
           activeDotStyle={styles.activeDot}
         >
           <View style={styles.slide}>
-            <Image
-              source={local}
-              style={styles.localImage}
-            />
+            <Image source={local} style={styles.localImage} />
           </View>
           <View style={styles.slide}>
-            <Image
-              source={{ uri: 'https://via.placeholder.com/370x120' }}
-              style={styles.localImage}
-            />
+            <Image source={{ uri: 'https://via.placeholder.com/370x120' }} style={styles.localImage} />
           </View>
           <View style={styles.slide}>
-            <Image
-              source={{ uri: 'https://via.placeholder.com/370x120' }}
-              style={styles.localImage}
-            />
+            <Image source={{ uri: 'https://via.placeholder.com/370x120' }} style={styles.localImage} />
           </View>
         </Swiper>
       </View>
@@ -64,7 +72,7 @@ export default function Local_Screen({ navigation }) {
         tours guiados pelos vinhedos e degustações que vão encantar seu paladar.
       </Text>
 
-      <TouchableOpacity style={styles.startButton}>
+      <TouchableOpacity style={styles.startButton} onPress={iniciarCircuito}>
         <Text style={styles.buttonText}>INICIE AQUI</Text>
       </TouchableOpacity>
     </View>
@@ -192,7 +200,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: '#000',
     fontWeight: '450',
-
   },
   startButton: {
     backgroundColor: '#16195D',
