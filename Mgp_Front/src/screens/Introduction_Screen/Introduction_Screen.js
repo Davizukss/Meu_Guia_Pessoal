@@ -3,8 +3,9 @@ import { Image, Text, View, StyleSheet, ImageBackground, TouchableOpacity } from
 import Swiper from 'react-native-swiper';
 import logo from '../../assets/Stack_Images/Tela_Inicio_Images/Logo_tela_inicio.png';
 import bck_init from '../../assets/Stack_Images/Tela_Inicio_Images/Bck_init.png';
-
+import { useNavigation } from '@react-navigation/native'; 
 export default function Introduction_Screen() {
+    const navigation = useNavigation();
     return (
         <Swiper style={styles.wrapper} showsButtons={false}  
         showsPagination={true}
@@ -16,7 +17,7 @@ export default function Introduction_Screen() {
                     <Text style={styles.title}>MEU GUIA PESSOAL</Text>
                     <Image source={logo} style={styles.logo} />
                     <Text style={styles.description}>
-                    Aproveite ao Máximo sua viagem com o nosso Guia! Permita a si mesmo ter um lazer sem a necessidade de um tempo limite.
+                    Aproveite ao máximo sua viagem com o nosso guia! Permita a si mesmo ter um lazer sem a necessidade de um tempo limite.
                     </Text>
                 </View>
             </ImageBackground>
@@ -25,7 +26,7 @@ export default function Introduction_Screen() {
                     <Text style={styles.title}>ESCOLHA SUA ROTA</Text>
                     <Image source={logo} style={styles.logo} />
                     <Text style={styles.description}>
-                    Com a customização de Rotas, você não perde nenhum dos destinos, atrações ou até paradas rápidas em sua Viagem!
+                    Com a customização de rotas, você não perde nenhum dos destinos, atrações ou até paradas rápidas em sua viagem!
                     </Text>
                 </View>
             </ImageBackground>
@@ -34,10 +35,10 @@ export default function Introduction_Screen() {
                     <Text style={styles.title}>INICIE SUA JORNADA</Text>
                     <Image source={logo} style={styles.logo} />
                     <Text style={styles.description}>
-                        Comece agora e obtenha o melhor do Lazer.
+                        Comece agora e obtenha o melhor do lazer.
                     </Text>
                 </View>
-                <TouchableOpacity style={styles.bck_button}>
+                <TouchableOpacity style={styles.bck_button} onPress={() => navigation.navigate('Map_Screen')}>
                     <Text style={styles.button}>INICIE AQUI</Text>
                 </TouchableOpacity>
             </ImageBackground>

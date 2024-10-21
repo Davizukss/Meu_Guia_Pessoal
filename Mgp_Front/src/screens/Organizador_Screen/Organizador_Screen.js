@@ -4,7 +4,7 @@ import voltar from '../../assets/Stack_Images/Organizador_Screen/voltar.png';
 import logo from '../../assets/Stack_Images/Organizador_Screen/logo.png';
 import google from '../../assets/Stack_Images/google.png';
 
-export default function MeuComponente() {
+export default function Organizador_Screen({ navigation }) {
     const [email, setEmail] = useState('');
     const [cnpj, setCnpj] = useState('');
     const [senha, setSenha] = useState('');
@@ -73,14 +73,14 @@ export default function MeuComponente() {
         }
     };
 
-    return  (
+    return (
         <ScrollView 
             contentContainerStyle={styles.container}
             showsVerticalScrollIndicator={false}  
             showsHorizontalScrollIndicator={false} 
         >
             <View style={styles.setaContainer}>
-                <TouchableOpacity style={styles.seta} onPress={() => {}}>
+                <TouchableOpacity style={styles.seta} onPress={() => navigation.goBack()}>
                     <ImageBackground source={voltar} style={styles.voltar} />
                 </TouchableOpacity>
             </View>
@@ -90,7 +90,7 @@ export default function MeuComponente() {
             </Text>
 
             <View style={styles.containerOpcao}>
-                <TouchableOpacity style={styles.Cliente}>
+                <TouchableOpacity style={styles.Cliente} onPress={() => navigation.navigate('TelaCadastroClie')}>
                     <Text style={styles.txtcliente}>Cliente</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Organizador}>
@@ -99,7 +99,7 @@ export default function MeuComponente() {
             </View>
 
             <View style={styles.containerInputs}>
-            <View style={styles.inputsView}>
+                <View style={styles.inputsView}>
                     <Text style={styles.label}>Nome do Estabelecimento:</Text>
                     <TextInput 
                         style={styles.input} 
@@ -166,10 +166,10 @@ export default function MeuComponente() {
                 <TouchableOpacity style={styles.botao} onPress={handleSubmit}>
                     <Text style={styles.conta}>CRIAR CONTA</Text>
                 </TouchableOpacity>
-                
+
                 <View style={styles.loginRow}>
                     <Text style={styles.jaPossui}>Já possui uma conta?</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity  onPress={() => navigation.navigate('TelaLogin')}>
                         <Text style={styles.txtPossui}> Login</Text>
                     </TouchableOpacity>
                 </View>
@@ -179,7 +179,6 @@ export default function MeuComponente() {
                 <TouchableOpacity style={styles.btn_google}>
                     <Image source={google} style={styles.img_google} />
                 </TouchableOpacity>
-                
             </View>
         </ScrollView>
     );
