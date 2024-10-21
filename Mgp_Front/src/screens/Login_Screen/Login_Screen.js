@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView , ImageBackground} from 'react-native';
+import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
 import logo from '../../assets/Stack_Images/Login_Screen/logo.png';
 import google from '../../assets/Stack_Images/Login_Screen/google.png';
 import voltar from '../../assets/Stack_Images/Login_Screen/voltar.png';
 
-export default function Login_Screen() {
+export default function Login_Screen({ navigation }) { // Adicione navigation como props
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [errors, setErrors] = useState({});
@@ -26,7 +26,6 @@ export default function Login_Screen() {
 
         setErrors(newErrors);
 
-        
         if (Object.keys(newErrors).length === 0) {
             try {
                 const response = await fetch('http://localhost:3001/api/login', {
@@ -52,14 +51,14 @@ export default function Login_Screen() {
 
     return (
         <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
-              <View style={styles.setaContainer}>
-                <TouchableOpacity style={styles.seta} onPress={() => {}}>
+            <View style={styles.setaContainer}>
+                <TouchableOpacity style={styles.seta} onPress={() => navigation.goBack()}> 
                     <ImageBackground source={voltar} style={styles.voltar} />
                 </TouchableOpacity>
             </View>
             <Image source={logo} style={styles.logo} />
             <Text style={styles.title}>SEJA BEM VINDO(A)</Text>
-            
+
             <Text style={styles.txt_email}>E-mail:</Text>
             <TextInput 
                 style={styles.email}
@@ -94,17 +93,19 @@ export default function Login_Screen() {
             <TouchableOpacity style={styles.btn_google_login}>
                 <Image source={google} style={styles.img_google} />
             </TouchableOpacity>
-            
+
             <View style={styles.rowContainer}>
-                <Text style={styles.nao_possui_conta}>não possui uma conta?</Text> 
-                <TouchableOpacity style={styles.btn_criar_conta}>
+                <Text style={styles.nao_possui_conta}>não possui uma conta?</Text>
+                <TouchableOpacity 
+                    style={styles.btn_criar_conta} 
+                    onPress={() => navigation.navigate('TelaCadastroClie')} 
+                >
                     <Text style={styles.txt_criar_conta}>Crie uma</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
     );
 }
-
 const styles = StyleSheet.create({
     setaContainer: {
         flexDirection: 'row',

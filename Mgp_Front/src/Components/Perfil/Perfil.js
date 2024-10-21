@@ -20,17 +20,17 @@ export default function Perfil() {
                 <Text style={styles.buttonText}>Cadastrar-se</Text>
             </TouchableOpacity>
             <View style={styles.configContainer}>
-            <TouchableOpacity style={styles.config} onPress={() => navigation.navigate('TelaHistoricoRotas')}>
+            <TouchableOpacity style={styles.config} onPress={() => navigation.navigate('Historico_Screen')}>
                 <Image source={historico} />
                 <Text style={styles.configText}> Histórico de Rotas</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.config} onPress={() => navigation.navigate('TelaConfiguracoes')}>
+            <TouchableOpacity style={styles.config} onPress={() => navigation.navigate('Config_Screen')}>
                 <Image source={configuracao} />
                 <Text style={styles.configText}>Configurações</Text>
             </TouchableOpacity>
             </View>
             <View style={styles.duvidaContainer}>
-            <TouchableOpacity style={styles.duvida} onPress={() => navigation.navigate('TelaAjuda')}>
+            <TouchableOpacity style={styles.duvida} onPress={() => navigation.navigate('Ajuda_Screen')}>
                 <Image source={duvida} />
             </TouchableOpacity>
             </View>
