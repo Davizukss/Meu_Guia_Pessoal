@@ -187,21 +187,23 @@ const MapScreen = () => {
               </TouchableOpacity>
             </View>
           ))}
-          <TouchableOpacity style={styles.buttonMaps} onPress={openMaps}>
-            <Text style={styles.buttonTextMaps}>Iniciar Rota (Maps)  </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.toggleButton} onPress={() => {
-            clearLocalData();
-            setShowRoute(false);
-            setModalVisible(false);
-          }}>
-            <Text style={styles.buttonText}>Remover Rota</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.toggleButton} onPress={() => {
+              clearLocalData();
+              setShowRoute(false);
+              setModalVisible(false);
+            }}>
+              <Text style={styles.buttonText}>Remover Rota</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonMaps} onPress={openMaps}>
+              <Text style={styles.buttonTextMaps}>Iniciar Rota (Maps)</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
 
       <TouchableOpacity style={styles.centerButton} onPress={centerMapOnUser}>
-        <Image  style={styles.centerButtonimg} source={central} />
+        <Image style={styles.centerButtonimg} source={central} />
       </TouchableOpacity>
     </View>
   );
@@ -236,7 +238,7 @@ const styles = StyleSheet.create({
     right: 20,
     zIndex: 1,
   },
-  centerButtonimg:{
+  centerButtonimg: {
     height: 28,
     width: 28,
   },
@@ -325,6 +327,12 @@ const styles = StyleSheet.create({
     bottom: 60,
     fontSize: 23,
     fontWeight: 'bold',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginTop: 20,
   },
 });
 
