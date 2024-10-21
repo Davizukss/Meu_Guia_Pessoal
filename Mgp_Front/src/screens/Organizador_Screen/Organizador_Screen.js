@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image } from 'react-native';
+import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image, Alert } from 'react-native';
 import voltar from '../../assets/Stack_Images/Organizador_Screen/voltar.png';
 import logo from '../../assets/Stack_Images/Organizador_Screen/logo.png';
 import google from '../../assets/Stack_Images/google.png';
@@ -22,7 +22,7 @@ export default function Organizador_Screen({ navigation }) {
         return cnpjRegex.test(cnpj);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const newErrors = {};
 
         if (!validateEmail(email)) {
@@ -45,7 +45,29 @@ export default function Organizador_Screen({ navigation }) {
         }
 
         if (Object.keys(newErrors).length === 0) {
-            console.log('Formulário enviado com sucesso:', { email, senha, cnpj, nome });
+
+            try {
+                const response = await fetch('http://localhost:3001/api/add-org', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ nome, cnpj, email, senha }),
+                });
+            if (response.ok) {
+              Alert.alert('Sucesso!', 'Cadastro realizado com sucesso');
+              console.log('Formulário enviado com sucesso:', { email, senha, cnpj, nome });
+  
+              setNome(''); 
+              setCnpj(''); 
+              setEmail('');
+              setSenha('');
+            } else {}
+          } catch (error) {
+            console.error('Detalhes:', error);
+            Alert.alert('Erro', 'Ocorreu um erro');
+          }
+
         } else {
             setErrors(newErrors);
         }
