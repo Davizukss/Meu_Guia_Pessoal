@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@emailjs/react-native": "^4.2.2",
     "@expo/metro-runtime": "~3.2.3",
     "debug": "^4.3.7",
     "expo": "~51.0.18",

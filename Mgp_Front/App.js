@@ -8,7 +8,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#4A4DA1"/>
-    {/*   <Cadastro_Cliente_Screen/> */}
+      {/* <Cadastro_Cliente_Screen/> */}
       <Send_Email_Screen/>
       {/* <Introduction_Screen/> */}
     </View>

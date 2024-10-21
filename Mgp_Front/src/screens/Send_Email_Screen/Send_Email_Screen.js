@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
-import emailjs from '@emailjs/browser'
+import { send, EmailJSResponseStatus } from '@emailjs/react-native';
 import voltar from '../../assets/Stack_Images/Cadastro_Cliente_Screen/voltar.png';
 import logo from '../../assets/Stack_Images/Cadastro_Cliente_Screen/logo.png';
 
 export default function Send_Email_Screen() {
     const [email, setEmail] = useState('');
+    const [codigo, setCodigo] = useState('')
     const [errors, setErrors] = useState({});
 
     const validateEmail = (email) => {
@@ -24,26 +25,30 @@ export default function Send_Email_Screen() {
             setErrors(newErrors);
         }
 
-        const serviceId = 'service_hwbz3hh';
-        const templateId = 'template_ru9s7zg';
-        const publicKey = '';
-
-        // Create a new object that contains dynamic template params
-        const templateParams = {
-        codigo: 123456,
-        to_email: email,
-        to_name: 'teste',
-        };
-
-        // Send the email using EmailJS
-        emailjs.send(serviceId, templateId, templateParams, publicKey)
-        .then((response) => {
-            console.log('Email sent successfully!', response);
-            setEmail('');
-        })
-        .catch((error) => {
-            console.error('Error sending email:', error);
-        });
+        
+        try {
+            send(
+            'service_4v7nywm',
+            'template_ru9s7zg',
+            {
+                name: 'Miguel',
+                email: email,
+                codigo: 1234
+            },
+            {
+                publicKey: '6F_6YgpmqQ-CbFgri6F_6YgpmqQ-CbFgri',
+            },
+            );
+    
+            console.log('SUCCESS!');
+        } catch (err) {
+            if (err instanceof EmailJSResponseStatus) {
+            console.log('EmailJS Request Failed...', err);
+            }
+    
+            console.log('ERROR', err);
+        }
+          
     };
 
     return  (
