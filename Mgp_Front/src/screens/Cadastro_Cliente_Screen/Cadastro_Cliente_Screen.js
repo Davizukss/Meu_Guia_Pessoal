@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, ImageBackground, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; 
 import voltar from '../../assets/Stack_Images/Cadastro_Cliente_Screen/voltar.png';
 import logo from '../../assets/Stack_Images/Cadastro_Cliente_Screen/logo.png';
 import google from '../../assets/Stack_Images/Cadastro_Cliente_Screen/google.png';
@@ -12,41 +13,15 @@ export default function Cadastro_Cliente_Screen() {
     const [confirmSenha, setConfirmSenha] = useState('');
     const [errors, setErrors] = useState({});
 
+    const navigation = useNavigation(); 
+
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     };
-    const validateCpf = (cpf) => {
 
-      cpf = cpf.replace(/\D/g, '');
+    
 
-      if (cpf.length !== 11) return false;
-  
-      if (/^(\d)\1+$/.test(cpf)) return false;
-  
-      let sum = 0;
-      let remainder;
-  
-      for (let i = 1; i <= 9; i++) {
-          sum += parseInt(cpf.substring(i-1, i)) * (11 - i);
-      }
-      remainder = (sum * 10) % 11;
-  
-      if ((remainder === 10) || (remainder === 11)) remainder = 0;
-      if (remainder !== parseInt(cpf.substring(9, 10))) return false;
-  
-      sum = 0;
-      for (let i = 1; i <= 10; i++) {
-          sum += parseInt(cpf.substring(i-1, i)) * (12 - i);
-      }
-      remainder = (sum * 10) % 11;
-  
-      if ((remainder === 10) || (remainder === 11)) remainder = 0;
-      if (remainder !== parseInt(cpf.substring(10, 11))) return false;
-  
-      return true;
-  };
-  
     const handleSubmit = () => {
         const newErrors = {};
 
@@ -65,25 +40,21 @@ export default function Cadastro_Cliente_Screen() {
             newErrors.confirmSenha = 'As senhas não são iguais';
         }
 
-        if (!validateCpf(cpf)) {
-            newErrors.cpf = ' CPF inválido';
-        }
-
         if (Object.keys(newErrors).length === 0) {
-            console.log('Formulário enviado com sucesso:', { email, senha, cpf, nome });
+            console.log('Formulário enviado com sucesso:', { email, senha, nome });
         } else {
             setErrors(newErrors);
         }
     };
 
-    return  (
+    return (
         <ScrollView 
             contentContainerStyle={styles.container}
             showsVerticalScrollIndicator={false}  
             showsHorizontalScrollIndicator={false} 
         >
             <View style={styles.setaContainer}>
-                <TouchableOpacity style={styles.seta} onPress={() => {}}>
+                <TouchableOpacity style={styles.seta} onPress={() => navigation.goBack()}>
                     <ImageBackground source={voltar} style={styles.voltar} />
                 </TouchableOpacity>
             </View>
@@ -96,13 +67,13 @@ export default function Cadastro_Cliente_Screen() {
                 <TouchableOpacity style={styles.Cliente}>
                     <Text style={styles.txtcliente}>Cliente</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.Organizador}>
+                <TouchableOpacity style={styles.Organizador}  onPress={() => navigation.navigate('TelaCadastroOrg')}>
                     <Text style={styles.txtorganizador}>Organizador</Text>
                 </TouchableOpacity>
             </View>
 
             <View style={styles.containerInputs}>
-            <View style={styles.inputsView}>
+                <View style={styles.inputsView}>
                     <Text style={styles.label}>Nome Completo:</Text>
                     <TextInput 
                         style={styles.input} 
@@ -127,18 +98,6 @@ export default function Cadastro_Cliente_Screen() {
                         value={email}
                     />
                     {errors.email && <Text style={styles.error}>{errors.email}</Text>}
-                </View>
-                <View style={styles.inputsView}>
-                    <Text style={styles.label}>CPF:</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        placeholder='000.000.000-00' 
-                        keyboardType='numeric' 
-                        maxLength={11} 
-                        onChangeText={setCpf} 
-                        value={cpf}
-                    />
-                    {errors.cpf && <Text style={styles.error}>{errors.cpf}</Text>}
                 </View>
                 <View style={styles.inputsView}>
                     <Text style={styles.label}>Senha:</Text>
@@ -172,7 +131,7 @@ export default function Cadastro_Cliente_Screen() {
                 
                 <View style={styles.loginRow}>
                     <Text style={styles.jaPossui}>Já possui uma conta?</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('TelaLogin')}>
                         <Text style={styles.txtPossui}> Login</Text>
                     </TouchableOpacity>
                 </View>
@@ -182,7 +141,6 @@ export default function Cadastro_Cliente_Screen() {
                 <TouchableOpacity style={styles.btn_google}>
                     <Image source={google} style={styles.img_google} />
                 </TouchableOpacity>
-                
             </View>
         </ScrollView>
     );
@@ -336,6 +294,3 @@ const styles = StyleSheet.create({
         color: '#969696',
     },
 });
-
-
-
