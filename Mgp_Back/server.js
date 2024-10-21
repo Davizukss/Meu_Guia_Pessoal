@@ -1,90 +1,92 @@
+// server.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const sql = require('mssql');
 
+const clientRoutes = require('./routes/clientRoutes');
+const organizerRoutes = require('./routes/organizerRoutes');
+const pontoRoutes = require('./routes/pontoRoutes');
+
+const { authenticateClient } = require('./models/clientModel');
+const { authenticateOrganizer } = require('./models/organizerModel');
 const app = express();
 const port = 3001;
-
 
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use('/api', clientRoutes);
+app.use('/api', organizerRoutes);
+app.use('/api', pontoRoutes);
 
-const config = {
-  user: 'sa', 
-  password:'123456',
-  server: 'localhost',
-  database: 'teste01',
-  options: {
-    encrypt: false, 
-  },
-};
-
-
-
-
-app.post('/add-org', async (req, res) => {
-  const { nome, email, senha } = req.body;
-  if (!nome || !email|| !senha) {
-    return res.status(400).send('Please provide both name and email.');
-  }
+app.post('/api/login', async (req, res) => {
+  const { email, senha } = req.body;
 
   try {
-    
-    await sql.connect(config);
-    
-    
-    const query = `INSERT INTO Organizador (nome, email, senha) VALUES (@nome, @email, @senha)`;
-    
-    
-    const request = new sql.Request();
-    
-    
-    request.input('nome', sql.VarChar, nome);
-    request.input('email', sql.VarChar, email);
-    request.input('senha', sql.VarChar, senha);
-    
-    await request.query(query);
+      // Try to login as an organizer first
+      const isOrganizer = await authenticateOrganizer(email, senha);
+      if (isOrganizer) {
+          return res.json({ success: true, role: 'organizer' });
+      }
 
-    res.status(200).send('Org added successfully.');
-  } catch (err) {
-    console.error('Error:', err);
-    res.status(500).send(`Failed to add client. Error details: ${err.message}`);
-  } finally {
-    
-    sql.close();
+      // Try to login as a client if not an organizer
+      const isClient = await authenticateClient(email, senha);
+      if (isClient) {
+          return res.json({ success: true, role: 'client' });
+      }
+
+      // If neither login works, return an error
+      res.json({ success: false, message: 'Invalid email or password' });
+  } catch (error) {
+      console.error('Login error:', error);
+      res.status(500).json({ success: false, message: 'Server error' });
   }
 });
 
-app.get('/login', async (req, res) => {
-  const { email, senha } = req.body;
-  if ( !email|| !senha) {
-    return res.status(400).send('Please provide both name and email.');
-  }
+const config = require('./config/dbconfig');
+const sql = require('mssql');
+
+
+// Dentro do app:
+// const fetchPontosTuristicos = async () => {
+//   try {
+//       const response = await fetch(`http://localhost:3001/listar?max=${max}&min=${min}`);
+
+//       if (response.ok) {
+//           const data = await response.json(); // Parse JSON response
+//           setPontosTuristicos(prev => [...prev, ...data]); // Append new data
+//           setMax(max + 5); // Increase max for next fetch
+//           setMin(min + 5); // Increase min for next fetch
+//       } else {
+//           console.error('Failed to fetch data:', response.statusText);
+//       }
+//   } catch (error) {
+//       console.error('Erro ao buscar pontos turísticos:', error);
+//   }
+// };
+
+app.get('/listar', async (req, res) => {
   try {
-    
     await sql.connect(config);
-
-    const query = 'select * from Organizador where email = @email and senha= @senha';
     
+    // Extracting the query parameters
+    const max = parseInt(req.query.max, 10); // Parse as integer
+    const min = parseInt(req.query.min, 10); // Parse as integer
+
     const request = new sql.Request();
-    
-    
-    request.input('email', sql.VarChar, email);
-    request.input('senha', sql.VarChar, senha);
-    
-    await request.query(query);
+    let query = 'SELECT * FROM Pontos_Turisticos WHERE ptour_id =< @max AND ptour_id >= @min';
 
-    res.status(200).send('Org added successfully.');
-    
-    await request.query(query);
-    
-    res.status(200).send('login ok');
-  } catch (err) {
-    
-    console.error('Database error:', err);
-    res.status(500).json({ message: 'Error fetching clients', error: err.message });
+    request.input('max', sql.BigInt, max);
+    request.input('min', sql.BigInt, min);
+  
+  
+      let result = await request.query(query);
+      res.send(result.recordset);
+  } catch (error) {
+      console.error('Error executing query:', error);
+      res.status(500).send('Error executing query');
+  }finally {
+    sql.close();
   }
 });
 
