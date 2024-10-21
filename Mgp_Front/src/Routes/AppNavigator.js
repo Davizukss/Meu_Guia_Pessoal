@@ -7,7 +7,7 @@ import CadastroClienteScreen from '../screens/Cadastro_Cliente_Screen/Cadastro_C
 import LoginScreen from '../screens/Login_Screen/Login_Screen';
 import TelaInicial from '../screens/Introduction_Screen/Introduction_Screen';
 import Local_Screen from '../Components/Local_Screen/Local_Screen.js'
-import { LocalProvider } from '../Context/Local_Context/LocalContext.js';
+import { LocalProvider } from '../Context/LocalContext.js';
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {

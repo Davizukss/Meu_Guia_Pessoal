@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@ant-design/react-native": "^5.2.3",
     "@react-native-community/geolocation": "^3.4.0",
     "@react-native-mapbox-gl/maps": "^8.6.0-beta.0",
     "@react-navigation/drawer": "^6.7.2",
@@ -22,6 +23,7 @@
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
     "react-native": "0.74.3",
+    "react-native-geolocation-service": "^5.3.1",
     "react-native-gesture-handler": "^2.20.0",
     "react-native-get-random-values": "^1.11.0",
     "react-native-google-places-autocomplete": "^2.5.7",

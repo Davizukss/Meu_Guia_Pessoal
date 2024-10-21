@@ -2,23 +2,30 @@ import React, { useContext } from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { LocalContext } from '../../Context/LocalContext'; 
-import local from '../../assets/Stack_Images/Lista_Locais/card.jpg';
+import { LocalContext } from '../../Context/LocalContext';
+import masp from '../../assets/Stack_Images/Lista_Locais/SaoPaulo.jpg';
+import ibira from '../../assets/Stack_Images/Lista_Locais/ibira.jpg';
+import catedralSe from '../../assets/Stack_Images/Lista_Locais/catedralSe.jpg';
+import mercadao from '../../assets/Stack_Images/Lista_Locais/mercadao.jpg';
+import museudoipiranga from '../../assets/Stack_Images/Lista_Locais/museudoipiranga.jpg';
+import teatroMuni from '../../assets/Stack_Images/Lista_Locais/TeatroMunicipal.png';
 
 const locais = [
-  { name: 'Vinícola São Roque', latitude: -23.5, longitude: -47.0 },
   { name: 'Avenida Paulista', latitude: -23.5617, longitude: -46.6552 },
   { name: 'Parque Ibirapuera', latitude: -23.5875, longitude: -46.6564 },
   { name: 'Museu do Ipiranga', latitude: -23.5908, longitude: -46.6340 },
-  { name: 'Mercadão de São Paulo', latitude: -23.5505, longitude: -46.6340 },
+  { name: 'Mercadão de São Paulo', latitude: -23.5467, longitude: -46.6340 },
+  { name: 'Teatro Municipal', latitude: -23.5505, longitude: -46.6333 },
+  { name: 'Catedral da Sé', latitude: -23.5505, longitude: -46.6342 },
+  { name: 'Pátio do Colégio', latitude: -23.5502, longitude: -46.6345 },
 ];
 
 export default function Local_Screen({ navigation }) {
-  const { setLocalData } = useContext(LocalContext); 
+  const { setLocalData } = useContext(LocalContext);
 
   const iniciarCircuito = () => {
-    setLocalData(locais); 
-    navigation.navigate('Map_Screen');  
+    setLocalData(locais);
+    navigation.navigate('Map_Screen');
   };
 
   return (
@@ -36,20 +43,29 @@ export default function Local_Screen({ navigation }) {
           activeDotStyle={styles.activeDot}
         >
           <View style={styles.slide}>
-            <Image source={local} style={styles.localImage} />
+            <Image source={masp} style={styles.localImage} />
           </View>
           <View style={styles.slide}>
-            <Image source={{ uri: 'https://via.placeholder.com/370x120' }} style={styles.localImage} />
+            <Image source={ibira} style={styles.localImage} />
           </View>
           <View style={styles.slide}>
-            <Image source={{ uri: 'https://via.placeholder.com/370x120' }} style={styles.localImage} />
+            <Image source={catedralSe} style={styles.localImage} />
+          </View>
+          <View style={styles.slide}>
+            <Image source={mercadao} style={styles.localImage} />
+          </View>
+          <View style={styles.slide}>
+            <Image source={museudoipiranga} style={styles.localImage} />
+          </View>
+          <View style={styles.slide}>
+            <Image source={teatroMuni} style={styles.localImage} />
           </View>
         </Swiper>
       </View>
 
       <View style={styles.infoRow}>
         <View style={styles.infoContainerW}>
-          <Text style={styles.infoTextB}>Consumo</Text>
+          <Text style={styles.infoTextB}>Histórico</Text>
         </View>
         <View style={styles.infoContainerB}>
           <Text style={styles.infoTextW}>Pago</Text>
@@ -66,10 +82,10 @@ export default function Local_Screen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.title}>Vinícola - São Roque</Text>
+      <Text style={styles.title}>Tour - São Paulo</Text>
       <Text style={styles.description}>
-        A Vinícola São Roque oferece uma experiência única, onde você encontrará vinhos de alta qualidade,
-        tours guiados pelos vinhedos e degustações que vão encantar seu paladar.
+        Participe de um tour histórico por São Paulo, visitando o Pátio do Colégio e a Catedral da Sé. Explore a rica herança cultural da cidade e saboreie 
+        um famoso sanduíche de mortadela no Mercado Municipal. Uma experiência imperdível!
       </Text>
 
       <TouchableOpacity style={styles.startButton} onPress={iniciarCircuito}>
