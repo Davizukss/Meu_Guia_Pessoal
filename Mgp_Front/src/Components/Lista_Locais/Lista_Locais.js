@@ -42,13 +42,13 @@ export default function Lista_Locais() {
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.container}>
-        <FlatList
-          data={locais}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.flatListContent}
-        />
+        {locais.map((item) => (
+          <TouchableOpacity key={item.id} onPress={() => handleImagePress(item.id)} style={styles.imageContainer}>
+            <Image source={item.image} style={styles.image} />
+            <View style={styles.overlay} />
+            <Text style={styles.imageText} numberOfLines={2} ellipsizeMode="tail">{item.title}</Text>
+          </TouchableOpacity>
+        ))}
         <TouchableOpacity onPress={handleVerMaisPress} style={styles.maisContainer}>
           <Text style={styles.MaisText}>Ver mais</Text>
         </TouchableOpacity>
@@ -59,7 +59,6 @@ export default function Lista_Locais() {
 
 const styles = StyleSheet.create({
   scrollViewContent: {
-    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center', 
   },

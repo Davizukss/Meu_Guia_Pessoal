@@ -16,7 +16,7 @@ const MapScreen = () => {
   const [locationLoaded, setLocationLoaded] = useState(false);
   const [routeCoordinates, setRouteCoordinates] = useState({ origin: null, destination: null, waypoints: [] });
 
-  const GOOGLE_MAPS_APIKEY = '';
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyA3-jOAVAcMqh2SJMfnDW7l7Bd5dYfgl5Y';
 
   useEffect(() => {
     (async () => {
