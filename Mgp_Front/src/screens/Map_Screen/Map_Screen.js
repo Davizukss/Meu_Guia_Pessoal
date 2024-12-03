@@ -7,6 +7,9 @@ import Pesquisa from '../../Components/Pesquisa/Pesquisa.js';
 import MapViewDirections from 'react-native-maps-directions';
 import central from "../../assets/Stack_Images/central.png";
 import AntDesign from '@expo/vector-icons/AntDesign';
+import Constants from 'expo-constants';
+const API_KEY = Constants.expoConfig.extra.API_KEY;
+
 
 const MapScreen = () => {
   const { localData, clearLocalData, setLocalData } = useContext(LocalContext);
@@ -15,8 +18,6 @@ const MapScreen = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [locationLoaded, setLocationLoaded] = useState(false);
   const [routeCoordinates, setRouteCoordinates] = useState({ origin: null, destination: null, waypoints: [] });
-
-  const GOOGLE_MAPS_APIKEY = 'AIzaSyA3-jOAVAcMqh2SJMfnDW7l7Bd5dYfgl5Y';
 
   useEffect(() => {
     (async () => {
@@ -75,7 +76,7 @@ const MapScreen = () => {
   };
 
   const centerMapOnUser = () => {
-    if (userLocation) {
+    if (userLocation && mapRef) {
       mapRef.animateToRegion({
         latitude: userLocation.latitude,
         longitude: userLocation.longitude,
@@ -142,7 +143,7 @@ const MapScreen = () => {
                 latitude: local.latitude,
                 longitude: local.longitude,
               }))}
-              apikey={GOOGLE_MAPS_APIKEY}
+              apikey={API_KEY} 
               strokeWidth={3}
               strokeColor="blue"
               onError={(errorMessage) => {

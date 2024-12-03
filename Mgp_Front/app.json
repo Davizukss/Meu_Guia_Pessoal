@@ -22,6 +22,9 @@
     },
     "web": {
       "favicon": "./src/assets/Stack_Images/icon.png"
+    },
+    "extra": {
+      "API_KEY": "AIzaSyA3-jOAVAcMqh2SJMfnDW7l7Bd5dYfgl5Y"
     }
   }
 }

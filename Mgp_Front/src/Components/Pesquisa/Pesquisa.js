@@ -6,11 +6,14 @@ import lupa from "../../assets/Stack_Images/Map_Screen/search.png";
 import filtro from "../../assets/Stack_Images/Map_Screen/filtro.png";
 import linha from "../../assets/Stack_Images/Map_Screen/linha.png";
 import Lista_Locais from '../Lista_Locais/Lista_Locais';
+import { locais } from '../../mocks/locaisMocks'; 
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const Pesquisa = () => {
   const [expanded, setExpanded] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredLocais, setFilteredLocais] = useState(locais);
   const translateY = useSharedValue(SCREEN_HEIGHT);
 
   useEffect(() => {
@@ -22,6 +25,13 @@ const Pesquisa = () => {
       keyboardHideListener.remove();
     };
   }, []);
+
+  useEffect(() => {
+    const filtered = locais.filter((item) =>
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredLocais(filtered);
+  }, [searchQuery]);
 
   const handleKeyboardShow = () => {
     translateY.value = withSpring(expanded ? 0 : SCREEN_HEIGHT * 0.4);
@@ -65,7 +75,9 @@ const Pesquisa = () => {
             <Image source={lupa} style={styles.icon} />
             <TextInput
               style={styles.pesquisa}
-              placeholder='Buscar rotas turísticas...'
+              placeholder="Buscar rotas turísticas..."
+              value={searchQuery}
+              onChangeText={(text) => setSearchQuery(text)} 
               onFocus={() => {
                 if (!expanded) {
                   toggleExpand(true);
@@ -77,7 +89,7 @@ const Pesquisa = () => {
             </TouchableOpacity>
           </View>
           <Text style={styles.rotasText}>Rotas Sugeridas:</Text>
-          <Lista_Locais />
+          <Lista_Locais locais={filteredLocais} /> 
         </Animated.View>
       </PanGestureHandler>
     </View>

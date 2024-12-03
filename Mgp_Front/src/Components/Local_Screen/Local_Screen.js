@@ -3,29 +3,44 @@ import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { LocalContext } from '../../Context/LocalContext';
-import masp from '../../assets/Stack_Images/Lista_Locais/SaoPaulo.jpg';
-import ibira from '../../assets/Stack_Images/Lista_Locais/ibira.jpg';
-import catedralSe from '../../assets/Stack_Images/Lista_Locais/catedralSe.jpg';
-import mercadao from '../../assets/Stack_Images/Lista_Locais/mercadao.jpg';
-import museudoipiranga from '../../assets/Stack_Images/Lista_Locais/museudoipiranga.jpg';
-import teatroMuni from '../../assets/Stack_Images/Lista_Locais/TeatroMunicipal.png';
+import { locais } from '../../mocks/locaisMocks';
 
-const locais = [
-  { name: 'Avenida Paulista', latitude: -23.5617, longitude: -46.6552 },
-  { name: 'Parque Ibirapuera', latitude: -23.5875, longitude: -46.6564 },
-  { name: 'Museu do Ipiranga', latitude: -23.5908, longitude: -46.6340 },
-  { name: 'Mercadão de São Paulo', latitude: -23.5467, longitude: -46.6340 },
-  { name: 'Teatro Municipal', latitude: -23.5505, longitude: -46.6333 },
-  { name: 'Catedral da Sé', latitude: -23.5505, longitude: -46.6342 },
-  { name: 'Pátio do Colégio', latitude: -23.5502, longitude: -46.6345 },
-];
-
-export default function Local_Screen({ navigation }) {
+export default function Local_Screen({ navigation, route }) {
   const { setLocalData } = useContext(LocalContext);
 
-  const iniciarCircuito = () => {
+  const { id } = route.params;
+
+
+  const localData = locais.find(local => local.id === id);
+
+  const iniciarCircuito = (locais) => {
     setLocalData(locais);
     navigation.navigate('Map_Screen');
+  };
+
+  if (!localData) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Local não encontrado!</Text>
+      </View>
+    );
+  }
+
+  
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      stars.push(
+        <AntDesign
+          key={i}
+          name="star"
+          size={24}
+          color={i < Math.floor(rating) ? "#16195D" : "#ccc"} 
+          style={styles.star}
+        />
+      );
+    }
+    return stars;
   };
 
   return (
@@ -42,53 +57,35 @@ export default function Local_Screen({ navigation }) {
           dotStyle={styles.dot}
           activeDotStyle={styles.activeDot}
         >
-          <View style={styles.slide}>
-            <Image source={masp} style={styles.localImage} />
-          </View>
-          <View style={styles.slide}>
-            <Image source={ibira} style={styles.localImage} />
-          </View>
-          <View style={styles.slide}>
-            <Image source={catedralSe} style={styles.localImage} />
-          </View>
-          <View style={styles.slide}>
-            <Image source={mercadao} style={styles.localImage} />
-          </View>
-          <View style={styles.slide}>
-            <Image source={museudoipiranga} style={styles.localImage} />
-          </View>
-          <View style={styles.slide}>
-            <Image source={teatroMuni} style={styles.localImage} />
-          </View>
+          {localData.locais.map((local, index) => (
+            <View style={styles.slide} key={index}>
+              <Image source={local.image} style={styles.localImage} />
+            </View>
+          ))}
         </Swiper>
       </View>
 
       <View style={styles.infoRow}>
         <View style={styles.infoContainerW}>
-          <Text style={styles.infoTextB}>Histórico</Text>
+          <Text style={styles.infoTextB}>{localData.categoria}</Text>
         </View>
         <View style={styles.infoContainerB}>
-          <Text style={styles.infoTextW}>Pago</Text>
+          <Text style={styles.infoTextW}>{localData.preco}</Text>
         </View>
       </View>
 
       <View style={styles.ratingContainer}>
-        {[...Array(5)].map((_, index) => (
-          <AntDesign key={index} name="star" size={24} color="#16195D" style={styles.star} />
-        ))}
-        <Text style={styles.rateText}>  5.0 </Text>
+        {renderStars(localData.avaliacao)} 
+        <Text style={styles.rateText}>{localData.avaliacao.toFixed(1)} </Text>
         <TouchableOpacity>
           <Text style={styles.ratingText}>(ver Avaliações)</Text>
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.title}>Tour - São Paulo</Text>
-      <Text style={styles.description}>
-        Participe de um tour histórico por São Paulo, visitando o Pátio do Colégio e a Catedral da Sé. Explore a rica herança cultural da cidade e saboreie 
-        um famoso sanduíche de mortadela no Mercado Municipal. Uma experiência imperdível!
-      </Text>
+      <Text style={styles.title}>{localData.title}</Text>
+      <Text style={styles.description}>{localData.descricao}</Text> 
 
-      <TouchableOpacity style={styles.startButton} onPress={iniciarCircuito}>
+      <TouchableOpacity style={styles.startButton} onPress={() => iniciarCircuito(localData.locais)}>
         <Text style={styles.buttonText}>INICIE AQUI</Text>
       </TouchableOpacity>
     </View>
@@ -158,7 +155,7 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   infoContainerW: {
-    width: '35%',
+    width: '50%',
     marginLeft: 10,
     paddingVertical: 10,
     paddingHorizontal: 10,
