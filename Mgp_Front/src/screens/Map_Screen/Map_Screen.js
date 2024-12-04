@@ -177,7 +177,7 @@ const MapScreen = () => {
               setModalVisible(false);
             }}
           >
-            <AntDesign name="close" size={30} style={styles.seta} />
+          <AntDesign name="close" size={30} style={styles.seta} />
           </TouchableOpacity>
           <Text style={styles.modalText}>Roteiro Turístico</Text>
           {localData.map((local, index) => (

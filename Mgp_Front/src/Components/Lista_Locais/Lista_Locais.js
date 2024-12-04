@@ -2,14 +2,12 @@ import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { locais } from '../../mocks/locaisMocks';
 
 export default function Lista_Locais({ locais }) {
   const navigation = useNavigation();
 
-  // Modificado para enviar o ID correto ao navegar
   const handleImagePress = (id) => {
-    navigation.navigate('Local_Screen', { id });  // Passando o ID para a próxima tela
+    navigation.navigate('Local_Screen', { id });  
   };
 
   const handleVerMaisPress = () => {

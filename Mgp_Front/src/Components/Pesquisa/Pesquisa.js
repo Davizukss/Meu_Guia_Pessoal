@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, TextInput, Image, Dimensions, TouchableOpacity, Text, Keyboard } from 'react-native';
+import { View, StyleSheet, TextInput, Image, Dimensions, TouchableOpacity, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import lupa from "../../assets/Stack_Images/Map_Screen/search.png";
@@ -7,24 +7,16 @@ import filtro from "../../assets/Stack_Images/Map_Screen/filtro.png";
 import linha from "../../assets/Stack_Images/Map_Screen/linha.png";
 import Lista_Locais from '../Lista_Locais/Lista_Locais';
 import { locais } from '../../mocks/locaisMocks'; 
+import Filtro from '../Filtro/Filtro'; 
 
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const Pesquisa = () => {
   const [expanded, setExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredLocais, setFilteredLocais] = useState(locais);
+  const [isFiltroVisible, setIsFiltroVisible] = useState(false);
   const translateY = useSharedValue(SCREEN_HEIGHT);
-
-  useEffect(() => {
-    const keyboardShowListener = Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
-    const keyboardHideListener = Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
-
-    return () => {
-      keyboardShowListener.remove();
-      keyboardHideListener.remove();
-    };
-  }, []);
 
   useEffect(() => {
     const filtered = locais.filter((item) =>
@@ -50,13 +42,21 @@ const Pesquisa = () => {
     } else if (translationY > threshold) {
       toggleExpand(false);
     } else {
-      translateY.value = withSpring(expanded ? 0 : SCREEN_HEIGHT);
+      translateY.value = withSpring(expanded ? 1 : SCREEN_HEIGHT);
     }
   };
 
   const toggleExpand = (shouldExpand) => {
     setExpanded(shouldExpand);
     translateY.value = withSpring(shouldExpand ? 0 : SCREEN_HEIGHT);
+  };
+
+  const toggleFiltro = () => {
+    setIsFiltroVisible(!isFiltroVisible); 
+  };
+
+  const closeFiltro = () => {
+    setIsFiltroVisible(false);
   };
 
   const animatedStyle = useAnimatedStyle(() => ({
@@ -84,10 +84,19 @@ const Pesquisa = () => {
                 }
               }}
             />
-            <TouchableOpacity>
+            <TouchableOpacity onPress={toggleFiltro}>
               <Image source={filtro} style={styles.icon} />
             </TouchableOpacity>
           </View>
+
+          {isFiltroVisible && (
+            <TouchableWithoutFeedback onPress={closeFiltro}>
+              <View style={styles.filtroContainer}>
+                <Filtro onClose={closeFiltro} /> 
+              </View>
+            </TouchableWithoutFeedback>
+          )}
+
           <Text style={styles.rotasText}>Rotas Sugeridas:</Text>
           <Lista_Locais locais={filteredLocais} /> 
         </Animated.View>
@@ -143,6 +152,22 @@ const styles = StyleSheet.create({
   icon: {
     width: 24,
     height: 24,
+  },
+  filtroContainer: {
+    position: 'absolute', 
+    top: 0, 
+    right: 0,  
+    height: SCREEN_HEIGHT,  
+    width: SCREEN_WIDTH * 0.8,  
+    backgroundColor: '#fff',
+    borderRadius: 30,
+    zIndex: 999,  
+    padding: 20,
+    shadowColor: '#000', 
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 10,
   },
 });
 

@@ -70,7 +70,7 @@ export const locais = [
       title: 'Vinícola - São Roque',
       avaliacao: 4.9,
       categoria: 'Pago',
-      categoria: 'Alimentação',
+      categoria: 'Consumo',
       descricao: 'Aprecie o vinho local e o belo cenário da Vinícola em São Roque, com visitas guiadas e degustações.',
       locais: [
         { name: 'Vinícola', latitude: -23.1853, longitude: -47.5278 },
