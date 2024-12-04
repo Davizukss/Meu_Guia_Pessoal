@@ -26,7 +26,7 @@ export default function Local_Screen({ navigation, route }) {
     );
   }
 
-  
+
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -35,7 +35,7 @@ export default function Local_Screen({ navigation, route }) {
           key={i}
           name="star"
           size={24}
-          color={i < Math.floor(rating) ? "#16195D" : "#ccc"} 
+          color={i < Math.floor(rating) ? "#16195D" : "#ccc"}
           style={styles.star}
         />
       );
@@ -57,9 +57,9 @@ export default function Local_Screen({ navigation, route }) {
           dotStyle={styles.dot}
           activeDotStyle={styles.activeDot}
         >
-          {localData.locais.map((local, index) => (
+          {localData.imagens.map((imagem, index) => (
             <View style={styles.slide} key={index}>
-              <Image source={local.image} style={styles.localImage} />
+              <Image source={imagem} style={styles.localImage} />
             </View>
           ))}
         </Swiper>
@@ -75,7 +75,7 @@ export default function Local_Screen({ navigation, route }) {
       </View>
 
       <View style={styles.ratingContainer}>
-        {renderStars(localData.avaliacao)} 
+        {renderStars(localData.avaliacao)}
         <Text style={styles.rateText}>{localData.avaliacao.toFixed(1)} </Text>
         <TouchableOpacity>
           <Text style={styles.ratingText}>(ver Avaliações)</Text>
@@ -83,7 +83,7 @@ export default function Local_Screen({ navigation, route }) {
       </View>
 
       <Text style={styles.title}>{localData.title}</Text>
-      <Text style={styles.description}>{localData.descricao}</Text> 
+      <Text style={styles.description}>{localData.descricao}</Text>
 
       <TouchableOpacity style={styles.startButton} onPress={() => iniciarCircuito(localData.locais)}>
         <Text style={styles.buttonText}>INICIE AQUI</Text>
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: 350,
     height: 250,
-    resizeMode: 'cover',
+    objectFit: 'cover',
   },
   pagination: {
     bottom: 20,
