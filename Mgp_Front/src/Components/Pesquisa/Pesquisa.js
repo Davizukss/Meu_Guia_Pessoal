@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, TextInput, Image, Dimensions, TouchableOpacity, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import { useFocusEffect } from '@react-navigation/native'; // Import do useFocusEffect
 import lupa from "../../assets/Stack_Images/Map_Screen/search.png";
 import filtro from "../../assets/Stack_Images/Map_Screen/filtro.png";
 import linha from "../../assets/Stack_Images/Map_Screen/linha.png";
 import Lista_Locais from '../Lista_Locais/Lista_Locais';
-import { locais } from '../../mocks/locaisMocks'; 
-import Filtro from '../Filtro/Filtro'; 
+import { locais } from '../../mocks/locaisMocks';
+import Filtro from '../Filtro/Filtro';
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -25,12 +26,32 @@ const Pesquisa = () => {
     setFilteredLocais(filtered);
   }, [searchQuery]);
 
+  useEffect(() => {
+    const keyboardShowListener = Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
+    const keyboardHideListener = Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
+
+    return () => {
+      keyboardShowListener.remove();
+      keyboardHideListener.remove();
+    };
+  }, []);
+
+  // Resetar altura inicial quando a tela é focada
+  useFocusEffect(
+    React.useCallback(() => {
+      translateY.value = withSpring(SCREEN_HEIGHT);
+      setExpanded(false);
+      setSearchQuery('');
+      setIsFiltroVisible(false);
+    }, [])
+  );
+
   const handleKeyboardShow = () => {
-    translateY.value = withSpring(expanded ? 0 : SCREEN_HEIGHT * 0.4);
+    translateY.value = withSpring(SCREEN_HEIGHT * 0.4);
   };
 
   const handleKeyboardHide = () => {
-    translateY.value = withSpring(expanded ? 0 : SCREEN_HEIGHT * 0.56);
+    translateY.value = withSpring(expanded ? 0 : SCREEN_HEIGHT * 0.4);
   };
 
   const handleGestureEnd = (event) => {
@@ -52,7 +73,7 @@ const Pesquisa = () => {
   };
 
   const toggleFiltro = () => {
-    setIsFiltroVisible(!isFiltroVisible); 
+    setIsFiltroVisible(!isFiltroVisible);
   };
 
   const closeFiltro = () => {
@@ -77,12 +98,8 @@ const Pesquisa = () => {
               style={styles.pesquisa}
               placeholder="Buscar rotas turísticas..."
               value={searchQuery}
-              onChangeText={(text) => setSearchQuery(text)} 
-              onFocus={() => {
-                if (!expanded) {
-                  toggleExpand(true);
-                }
-              }}
+              onChangeText={(text) => setSearchQuery(text)}
+              onFocus={handleKeyboardShow}
             />
             <TouchableOpacity onPress={toggleFiltro}>
               <Image source={filtro} style={styles.icon} />
@@ -92,13 +109,13 @@ const Pesquisa = () => {
           {isFiltroVisible && (
             <TouchableWithoutFeedback onPress={closeFiltro}>
               <View style={styles.filtroContainer}>
-                <Filtro onClose={closeFiltro} /> 
+                <Filtro onClose={closeFiltro} />
               </View>
             </TouchableWithoutFeedback>
           )}
 
           <Text style={styles.rotasText}>Rotas Sugeridas:</Text>
-          <Lista_Locais locais={filteredLocais} /> 
+          <Lista_Locais locais={filteredLocais} />
         </Animated.View>
       </PanGestureHandler>
     </View>
@@ -154,16 +171,16 @@ const styles = StyleSheet.create({
     height: 24,
   },
   filtroContainer: {
-    position: 'absolute', 
-    top: 0, 
-    right: 0,  
-    height: SCREEN_HEIGHT,  
-    width: SCREEN_WIDTH * 0.8,  
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    height: SCREEN_HEIGHT,
+    width: SCREEN_WIDTH * 0.8,
     backgroundColor: '#fff',
     borderRadius: 30,
-    zIndex: 999,  
+    zIndex: 999,
     padding: 20,
-    shadowColor: '#000', 
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
     shadowRadius: 10,
